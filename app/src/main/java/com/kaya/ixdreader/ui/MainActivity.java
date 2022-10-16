@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.kaya.ixdreader.R;
 import com.kaya.ixdreader.adapter.BookListAdapter;
-import com.kaya.ixdreader.model.bookshelf_item;
+import com.kaya.ixdreader.model.OneItemBook;
 import com.kaya.ixdreader.utils.FileUtils;
 import com.kaya.ixdreader.utils.ListDataSaveUtil;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
 
     private RecyclerView booklistRecycleView;
     private BookListAdapter bookListAdapter;
-    private List<bookshelf_item> databooklist;
+    private List<OneItemBook> databooklist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +67,11 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(myToolbar);
         booklistRecycleView = findViewById(R.id.book_list_recyclerview);
         databooklist = new ArrayList<>();
-        if(ListDataSaveUtil.getInstance().getDataList(bookshelf_item.BOOK_TAG).size() == 0){
-            databooklist.add(new bookshelf_item(bookshelf_item.ADD_TYPE,"","",""));
+        if(ListDataSaveUtil.getInstance().getDataList(OneItemBook.BOOK_TAG).size() == 0){
+            databooklist.add(new OneItemBook(OneItemBook.ADD_TYPE,"","",""));
         }
         {
-            databooklist.addAll(ListDataSaveUtil.getInstance().getDataList(bookshelf_item.BOOK_TAG));
+            databooklist.addAll(ListDataSaveUtil.getInstance().getDataList(OneItemBook.BOOK_TAG));
         }
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         booklistRecycleView.setLayoutManager(layoutManager);
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
             public void DeleteBook(int position) {
                 ListDataSaveUtil.getInstance().deleteSaveContentHistory(databooklist.get(position).getBookurl());
                 databooklist.remove(position);
-                ListDataSaveUtil.getInstance().setDataList(bookshelf_item.BOOK_TAG,databooklist);
+                ListDataSaveUtil.getInstance().setDataList(OneItemBook.BOOK_TAG,databooklist);
                 bookListAdapter.notifyDataSetChanged();
             }
         });
@@ -126,8 +126,8 @@ public class MainActivity extends BaseActivity {
     }
 
     public void updateDataList(String openUrl){
-        bookshelf_item temp;
-        for(bookshelf_item mbookshelf_item:databooklist){
+        OneItemBook temp;
+        for(OneItemBook mbookshelf_item:databooklist){
             if(mbookshelf_item.getBookurl().equals(openUrl)){
                 temp = mbookshelf_item;
                 databooklist.remove(mbookshelf_item);
@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity {
                 break;
             }
         }
-        ListDataSaveUtil.getInstance().setDataList(bookshelf_item.BOOK_TAG,databooklist);
+        ListDataSaveUtil.getInstance().setDataList(OneItemBook.BOOK_TAG,databooklist);
     }
 
     @Override
@@ -144,14 +144,14 @@ public class MainActivity extends BaseActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             String filePath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
             int flag = 0;
-            for(bookshelf_item mbookshelf_item:databooklist){
+            for(OneItemBook mbookshelf_item:databooklist){
                 if(mbookshelf_item.getBookurl().equals(filePath)){
                     flag = 1;
                 }
             }
             if(flag == 0){
-                databooklist.add(new bookshelf_item(bookshelf_item.SHOW_TYEP, FileUtils.getFileNameNotType(filePath),filePath,""+System.currentTimeMillis()));
-                ListDataSaveUtil.getInstance().setDataList(bookshelf_item.BOOK_TAG,databooklist);
+                databooklist.add(new OneItemBook(OneItemBook.SHOW_TYEP, FileUtils.getFileNameNotType(filePath),filePath,""+System.currentTimeMillis()));
+                ListDataSaveUtil.getInstance().setDataList(OneItemBook.BOOK_TAG,databooklist);
                 bookListAdapter.notifyDataSetChanged();
             }
             else {

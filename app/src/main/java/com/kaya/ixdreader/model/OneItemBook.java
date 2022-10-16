@@ -1,6 +1,6 @@
 package com.kaya.ixdreader.model;
 
-public class bookshelf_item {
+public class OneItemBook {
     int type;
     String bookname;
     String bookurl;
@@ -26,7 +26,7 @@ public class bookshelf_item {
         return bookid;
     }
 
-    public bookshelf_item(int type, String bookname, String bookurl, String bookid) {
+    public OneItemBook(int type, String bookname, String bookurl, String bookid) {
         this.type = type;
         this.bookname = bookname;
         this.bookurl = bookurl;

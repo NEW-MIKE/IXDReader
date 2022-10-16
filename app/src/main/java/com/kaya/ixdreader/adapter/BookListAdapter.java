@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kaya.ixdreader.R;
-import com.kaya.ixdreader.model.bookshelf_item;
+import com.kaya.ixdreader.model.OneItemBook;
 import com.kaya.ixdreader.ui.MainActivity;
 import com.kaya.ixdreader.ui.ReadActivity;
 import com.kaya.ixdreader.utils.FileUtils;
@@ -22,10 +22,10 @@ import com.kaya.ixdreader.viewholder.ShowBookViewHolder;
 import java.util.List;
 
 public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<bookshelf_item> datalist;
+    private List<OneItemBook> datalist;
     private Context context;
 
-    public BookListAdapter(List<bookshelf_item> datalist, Context context) {
+    public BookListAdapter(List<OneItemBook> datalist, Context context) {
         this.datalist = datalist;
         this.context = context;
     }
@@ -35,10 +35,10 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType){
-            case bookshelf_item.ADD_TYPE:
+            case OneItemBook.ADD_TYPE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booklist_add_item,parent,false);
                 return new AddBookViewHolder(view);
-            case bookshelf_item.SHOW_TYEP:
+            case OneItemBook.SHOW_TYEP:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booklist_show_items,parent,false);
                 return new ShowBookViewHolder(view);
             default:
