@@ -56,7 +56,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     ((MainActivity)context).updateDataList(datalist.get(position).getBookurl());
-                    ReadActivity.actionStart(context,datalist.get(1).getBookurl(),datalist.get(1).getBookid());
+                    ReadActivity.actionStart(context,datalist.get(1).getBookurl(),datalist.get(1).getBookid(),datalist.get(1).getBookname());
 
                 }
             });

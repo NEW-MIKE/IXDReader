@@ -2,9 +2,8 @@ package com.kaya.ixdreader.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class downReader implements Reader {
+public class DownReader implements Reader {
 
     private String path2Tag;
     private FileOpenUtils fileUtils;
@@ -12,7 +11,7 @@ public class downReader implements Reader {
     private int mReadMode = 0;
     private String[] flag;
     private List<String> mReaderContent = new ArrayList<>();
-    public downReader(String path){
+    public DownReader(String path){
         path2Tag = path;
         fileUtils = new FileOpenUtils(path);
         mReadMode = ListDataSaveUtil.getInstance().GetReadMode();
@@ -69,10 +68,6 @@ public class downReader implements Reader {
         saveContentHistory.setLastContent(lastContent);
         saveContentHistory.setSaveContent(mReaderContent);
         ListDataSaveUtil.getInstance().toSaveContentHistory(path2Tag,saveContentHistory);
-    }
-
-    public int getReadHistory(){
-        return 1;
     }
 
     /**此处的逻辑，是对于获取到的段落进行处理，如果不存在，那么，就需要进行进行下一次读取了，如果存在，那么，就从这里面获取，并且截断 */

@@ -18,8 +18,13 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.ReadActivity"></activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.ReadActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity android:name=".ui.MainActivity"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
